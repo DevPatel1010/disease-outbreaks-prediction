@@ -1,6 +1,7 @@
 import os 
 import pickle
 import streamlit as st
+import streamlit_option_menu 
 from streamlit_option_menu import option_menu
 
 st.set_page_config(page_title="Prediction of disease Outbreaks", 
@@ -12,7 +13,7 @@ heart_model = pickle.load(open('E:\\Edunet AI Phase 3\\training_models\\heart_mo
 parkinson_model = pickle.load(open('E:\\Edunet AI Phase 3\\training_models\\parkinsons_model.sav', 'rb'))
 
 with st.sidebar:
-    selected = option_menu("Prediction of disease outbreak system ", 
+    selected = option_menu("Prediction of Disease Outbreak System ", 
                            ["Diabetes Prediction", "Heart Disease Prediction", "Parkinson Disease Prediction"],
                            menu_icon = "hospital-fill", icons=['activity', 'heart', 'person'], default_index=0) 
     
@@ -36,16 +37,16 @@ if selected == "Diabetes Prediction":
     with col2:
         Age = st.text_input("Age of the person")
 
-diab_diagonosis = " "
-if st.button("Diabetes test Result"):
-    user_input = [Pregnancies, glucose, Blood_pressure, Skin_thickness, Insulin, BMI, Diabetes_pedigree_function, Age]
-    user_input = [float(i) for i in user_input]
-    diab_prediction = diabetes_model.predict([user_input])
-    if diab_prediction[0] == 1:
-        diab_diagonosis = "The person is Diabetic"
-    else:
-        diab_diagonosis = "The person is not Diabetic"
-st.write(diab_diagonosis)
+    diab_diagonosis = " "
+    if st.button("Diabetes test Result"):
+        user_input = [Pregnancies, glucose, Blood_pressure, Skin_thickness, Insulin, BMI, Diabetes_pedigree_function, Age]
+        user_input = [float(i) for i in user_input]
+        diab_prediction = diabetes_model.predict([user_input])
+        if diab_prediction[0] == 1:
+            diab_diagonosis = "The person is Diabetic"
+        else:
+            diab_diagonosis = "The person is not Diabetic"
+    st.write(diab_diagonosis)
 
 if selected == "Heart Disease Prediction":
     st.title("Heart Disease Prediction using ML")
@@ -78,17 +79,17 @@ if selected == "Heart Disease Prediction":
         Thalassemia = st.text_input("Thal: 0=normal, 1=fixed defect, 2=reversable defect")
     
 
-heart_diagonosis = " "
+    heart_diagonosis = " "
 
-if st.button("Heart disease test Result"):
-    user_input = [Age, Sex, Cheast_Pain, Blood_pressure, Serum, Fasting_Blood_sugar, Electrocardiographic, Heart_rate, Exercise_induced_angina, ST_depression, Slope, Major_vessels, Thalassemia]
-    user_input = [float(i) for i in user_input]
-    Heart_Disease_prediction = heart_model.predict([user_input])
-    if Heart_Disease_prediction[0] == 1:
-        heart_diagonosis = "The person has Heart Disease"
-    else:
-        heart_diagonosis = "The person is not Heart Disease"
-st.write(heart_diagonosis)
+    if st.button("Heart disease test Result"):
+        user_input = [Age, Sex, Cheast_Pain, Blood_pressure, Serum, Fasting_Blood_sugar, Electrocardiographic, Heart_rate, Exercise_induced_angina, ST_depression, Slope, Major_vessels, Thalassemia]
+        user_input = [float(i) for i in user_input]
+        Heart_Disease_prediction = heart_model.predict([user_input])
+        if Heart_Disease_prediction[0] == 1:
+            heart_diagonosis = "The person has Heart Disease"
+        else:
+            heart_diagonosis = "The person is not Heart Disease"
+    st.write(heart_diagonosis)
 
 if selected == "Parkinson Disease Prediction":
     st.title("Parkinson Disease Prediction using Ml")
@@ -136,16 +137,16 @@ if selected == "Parkinson Disease Prediction":
     with col1:
         PPE = st.text_input("PPE")
 
-parkinson_diagonosis = " "
-if st.button("Parkinson Disease test Result"):
-    user_input = [MDVP_Fo, MDVP_Fhi, MDVP_Jitter, MDVP_Jiter_Abs, MDVP_RAP, MDVP_PPQ, Jitter_DDP, MDVP_Shimmer, MDVP_Shimmer_dB, Shimmer_APQ3, Shimmer_APQ5, MDVP_APQ, Shimmer_DDA, NHR, HNR, RPDE, DFA, Spread1, Spread2, D2, PPE]
-    user_input = [float(i) for i in user_input]
-    parkinson_prediction = parkinson_model.predict([user_input])
-    if parkinson_prediction[0] == 1:
-        parkinson_diagonosis = "The person has Parkinson Disease"
-    else:
-        parkinson_diagonosis = "The person is not Parkinson Disease"
-st.write(parkinson_diagonosis)
+    parkinson_diagonosis = " "
+    if st.button("Parkinson Disease test Result"):
+        user_input = [MDVP_Fo, MDVP_Fhi, MDVP_Jitter, MDVP_Jiter_Abs, MDVP_RAP, MDVP_PPQ, Jitter_DDP, MDVP_Shimmer, MDVP_Shimmer_dB, Shimmer_APQ3, Shimmer_APQ5, MDVP_APQ, Shimmer_DDA, NHR, HNR, RPDE, DFA, Spread1, Spread2, D2, PPE]
+        user_input = [float(i) for i in user_input]
+        parkinson_prediction = parkinson_model.predict([user_input])
+        if parkinson_prediction[0] == 1:
+            parkinson_diagonosis = "The person has Parkinson Disease"
+        else:
+            parkinson_diagonosis = "The person is not Parkinson Disease"
+    st.write(parkinson_diagonosis)
 
     
 
